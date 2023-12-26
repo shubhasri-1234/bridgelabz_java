@@ -16,10 +16,9 @@ public class UC4<T extends Comparable<T>> {
     }
 
     // Static method to find maximum of n values
-    @SafeVarargs
     public static <T extends Comparable<T>> T testMaximum(T... values) {
         if (values.length == 0) {
-            throw new IllegalArgumentException("No values provided");
+            System.out.println("No values provided");
         }
 
         T max = values[0];
