@@ -6,6 +6,7 @@ class Harmonic{
         int N = input.nextInt();
         if (N <= 0) {
             System.out.println("N should be greater than 0.");
+            input.close();
             return;
         }
         double hvalue = 0.0;
