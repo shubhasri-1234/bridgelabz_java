@@ -46,7 +46,7 @@ public class Refactor1<T extends Comparable<T>> {
         System.out.println("Max String at 1st Position: " + maxFirstPosition2);
         
         // Test case 2: Max String at 2nd Position
-        String maxSecondPosition2 = finder2.findMaximum("Apple", "Banana", "Peach");
+        String maxSecondPosition2 = finder2.findMaximum("Apple", "Peach", "Banana");
         System.out.println("Max String at 2nd Position: " + maxSecondPosition2);
         
         // Test case 3: Max String at 3rd Position

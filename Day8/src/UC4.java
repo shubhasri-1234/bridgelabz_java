@@ -1,7 +1,11 @@
+import java.util.Arrays;
+
 public class UC4<T extends Comparable<T>> {
     private T x;
     private T y;
     private T z;
+    public T[] values;
+
 
     // Parameterized constructor
     public UC4(T x, T y, T z) {
@@ -9,32 +13,53 @@ public class UC4<T extends Comparable<T>> {
         this.y = y;
         this.z = z;
     }
+    
 
-    // Test maximum method
-    public T testMaximum() {
-        return UC4.testMaximum(x, y, z);
+     UC4(T... values) {
+        this.values = values;
     }
 
-    // Static method to find maximum of n values
-    public static <T extends Comparable<T>> T testMaximum(T... values) {
-        if (values.length == 0) {
-            System.out.println("No values provided");
+    public T find() {
+        return UC4.find(values);
+    }
+
+    public static <T extends Comparable<T>> T testMaximum(T x, T y, T z) {
+        T max = x;
+
+        if (y.compareTo(max) > 0) {
+            max = y;
         }
 
-        T max = values[0];
-
-        for (T value : values) {
-            if (value.compareTo(max) > 0) {
-                max = value;
-            }
+        if (z.compareTo(max) > 0) {
+            max = z;
         }
 
         return max;
     }
 
+    public T testMaximum() {
+        return UC4.testMaximum(x, y, z);
+    }
+    
+    public static <T extends Comparable<T>> T find(T... values) {
+
+        if (values == null || values.length == 0) {
+            System.out.println("At least one value must be provided");
+        }
+
+        Arrays.sort(values);
+        return values[values.length - 1];
+
+    }
+
+    public void printMax() {
+        T max = find();
+        System.out.println("Maximum Value: " + max);
+    }
+
     public static void main(String[] args) {
         // Test case using Integer values
-       UC4<Integer> integerMaximum = new UC4<>(3, 7, 1);
+        Refactor2<Integer> integerMaximum = new Refactor2<>(3, 7, 1);
         System.out.println("Maximum Integer: " + integerMaximum.testMaximum());
 
         // Test case using Double values
@@ -45,10 +70,13 @@ public class UC4<T extends Comparable<T>> {
         UC4<String> stringMaximum = new UC4<>("apple", "banana", "orange");
         System.out.println("Maximum String: " + stringMaximum.testMaximum());
 
-        // Test case with more parameters
-        // Test case with more parameters
-        UC4<Integer> extendedIntegerMaximum = new UC4<>(5, 8, 3);
-        System.out.println("Extended Maximum Integer: " + extendedIntegerMaximum.testMaximum(12, 7, 2));
+        UC4<Integer> int1 = new UC4<Integer>(10,20,30,40,50);
+        UC4<Float> flo1= new UC4<Float>(3.5f, 7.2f, 1.9f, 2.2f, 9.6f);
+        UC4<String> str1 = new UC4<String>("Apple", "Orange", "Banana", "Grape", "Kiwi");
 
+        int1.printMax();
+        flo1.printMax();
+        str1.printMax();
     }
 }
+

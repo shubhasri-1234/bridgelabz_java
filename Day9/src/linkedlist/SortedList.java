@@ -1,6 +1,5 @@
 package linkedlist;
 public class SortedList<T extends Comparable<T>> extends LinkedList<T> {
-    @Override
     public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null || head.data.compareTo(data) >= 0) {
