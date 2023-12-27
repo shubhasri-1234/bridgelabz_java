@@ -1,3 +1,4 @@
+package HashMap;
 public class WordFrequencyCounter {
     public static void main(String[] args) {
         // Example 1: Frequency of words in a sentence

@@ -1,12 +1,13 @@
-import java.util.LinkedList;
+package HashMap;
+
 public class HashTable {
     private static final int SIZE = 10;
-    LinkedList<Node>[] array;
+    Node[] array;
 
     public HashTable() {
-        array = new LinkedList[SIZE];
+        array = new Node[SIZE];
         for (int i = 0; i < SIZE; i++) {
-            array[i] = new LinkedList<>();
+            array[i] = null;
         }
     }
 
@@ -15,35 +16,60 @@ public class HashTable {
     }
 
     public void insert(String key) {
-        int index = getHash(key.toLowerCase()); // Convert the key to lowercase
-        LinkedList<Node> list = array[index];
+        int index = getHash(key.toLowerCase());
+        Node newNode = new Node(key.toLowerCase(), 1);
 
-        // Check if the word already exists in the linked list
-        for (Node node : list) {
-            if (node.key.equals(key.toLowerCase())) {
-                node.value++;
-                return;
+        if (array[index] == null) {
+            array[index] = newNode;
+        } else {
+            Node current = array[index];
+            while (current.next != null) {
+                if (current.key.equals(key.toLowerCase())) {
+                    current.value++;
+                    return;
+                }
+                current = current.next;
+            }
+            if (current.key.equals(key.toLowerCase())) {
+                current.value++;
+            } else {
+                current.next = newNode;
             }
         }
-
-        // If the word doesn't exist, add a new node to the linked list
-        list.add(new Node(key.toLowerCase(), 1));
     }
 
     public void display() {
         for (int i = 0; i < SIZE; i++) {
-            LinkedList<Node> list = array[i];
-            for (Node node : list) {
-                System.out.println("Word: " + node.key + ", Frequency: " + node.value);
+            Node current = array[i];
+            while (current != null) {
+                System.out.println("Word: " + current.key + ", Frequency: " + current.value);
+                current = current.next;
             }
         }
     }
 
     public void remove(String key) {
-        int index = getHash(key);
-        LinkedList<Node> list = array[index];
+        int index = getHash(key.toLowerCase());
 
-        // Find and remove the node with the specified key
-        list.removeIf(node -> node.key.equals(key));
+        if (array[index] == null) {
+            return;
+        }
+
+        Node current = array[index];
+        Node prev = null;
+
+        while (current != null && !current.key.equals(key.toLowerCase())) {
+            prev = current;
+            current = current.next;
+        }
+
+        if (current != null) {
+            if (prev == null) {
+                // Node to be removed is the head of the linked list
+                array[index] = current.next;
+            } else {
+                prev.next = current.next;
+            }
+        }
     }
 }
