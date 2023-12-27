@@ -15,12 +15,13 @@ public class UC4<T extends Comparable<T>> {
     }
     
 
-     UC4(T... values) {
+    public UC4(T... values) {
         this.values = values;
     }
 
-    public T find() {
-        return UC4.find(values);
+
+    public T value() {
+        return UC4.value(values);
     }
 
     public static <T extends Comparable<T>> T testMaximum(T x, T y, T z) {
@@ -41,7 +42,7 @@ public class UC4<T extends Comparable<T>> {
         return UC4.testMaximum(x, y, z);
     }
     
-    public static <T extends Comparable<T>> T find(T... values) {
+    public static <T extends Comparable<T>> T value(T... values) {
 
         if (values == null || values.length == 0) {
             System.out.println("At least one value must be provided");
@@ -53,7 +54,7 @@ public class UC4<T extends Comparable<T>> {
     }
 
     public void printMax() {
-        T max = find();
+        T max = value();
         System.out.println("Maximum Value: " + max);
     }
 
