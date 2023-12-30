@@ -10,7 +10,7 @@ public class HashTable {
             array[i] = null;
         }
     }
-
+//The hash code is computed using the getHash method,
     private int getHash(String key) {
         return Math.abs(key.hashCode() % SIZE);
     }
@@ -21,7 +21,9 @@ public class HashTable {
 
         if (array[index] == null) {
             array[index] = newNode;
-        } else {
+        } 
+        //// Check the last node in the linked list
+        else {
             Node current = array[index];
             while (current.next != null) {
                 if (current.key.equals(key.toLowerCase())) {
